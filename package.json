@@ -13,6 +13,7 @@
   "ava": {
     "babel": "inherit",
     "require": [
+      "babel-polyfill",
       "babel-register"
     ]
   },
@@ -28,5 +29,8 @@
     "babel-preset-latest": "^6.22.0",
     "babel-register": "^6.22.0"
   },
-  "dependencies": {}
+  "dependencies": {
+    "moment": "^2.17.1",
+    "mtgjson": "^3.8.1"
+  }
 }
