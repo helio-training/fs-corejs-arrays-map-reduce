@@ -24,13 +24,8 @@ export default {
   findById(id) {
     return this.all()
                .filter(card => card.id === id)
-               .map(card => {
-                 return {
-                   id: card.id,
-                   name: card.name,
-                 };
-               })
-               .reduce((_, current) => current, {});
+               .reduce((previous, current) => current, {});
+               // .map(card => (<div>{card.name}</div>))
   },
 
   simplify() {

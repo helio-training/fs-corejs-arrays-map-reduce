@@ -61,6 +61,7 @@ Test(`find odd numbers between 1 - 10`, t => {
 Test(`findById`, t => {
   const id = `BRMA13_4_2_TB`;
   const card = Cards.findById(id);
+  console.log(card);
   t.is(card.id, id);
   t.falsy(Array.isArray(card));
 });
