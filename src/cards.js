@@ -1,24 +1,36 @@
-import Cards from './datasets/cards';
+import Cards from './datasets/cards'
 
 export default {
 
   all() {
-    return Cards;
+    return Cards
   },
 
-  attackGreaterThan(attack = 5) {
+  attackGreaterThan(attack) {
     return this.all()
                .filter(card => {
-                 return card.attack > attack;
-               });
+                 // Do something with attack then filter
+                 return card.attack > attack
+               })
   },
 
-  healthGreaterThan() {
-
+  healthGreaterThan(health) {
+    return this.all()
+               .filter(card => card.health > health)
   },
 
-  byName() {
-    const name = `Wild Magic`;
-  }
-};
+  byName(name) {
+    return this.all()
+               .filter(card => card.name === name)
+  },
 
+  simplify() {
+    return this.all()
+               .map(original => {
+                 return {
+                   id: original.id,
+                   name: original.name,
+                 }
+               })
+  },
+}
