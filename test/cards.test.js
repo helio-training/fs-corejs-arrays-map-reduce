@@ -61,7 +61,49 @@ Test(`find odd numbers between 1 - 10`, t => {
 Test(`findById`, t => {
   const id = `BRMA13_4_2_TB`;
   const card = Cards.findById(id);
-  console.log(card);
   t.is(card.id, id);
   t.falsy(Array.isArray(card));
+});
+
+Test(`add will add a card to the existing array of cards`, t => {
+  const card = {
+    dbfId: 11111,
+    id: 'TYLER',
+    name: 'The Kabal',
+    playerClass: 'NEUTRAL',
+    set: 'TB',
+    type: 'ENCHANTMENT',
+  };
+
+  const originalLength = Cards.all().length;
+  const results = Cards.add(card);
+
+  t.not(originalLength, results.length);
+  t.deepEqual(results[results.length - 1], card);
+});
+
+Test(`update a card that is known `, t => {
+  const id = `BRMA13_4_2_TB`;
+  const card = {
+    'cost': 2,
+    'dbfId': 31095,
+    'id': id,
+    'name': 'Tyler',
+    'playerClass': 'NEUTRAL',
+    'set': 'TB',
+    'text': '<b>Hero Power</b>\nPut a random spell from your opponent\'s class into your hand.',
+    'type': 'HERO_POWER',
+  };
+
+  const results = Cards.update(id, card);
+  const updatedCard = results.filter(c => c.id === card.id).reduce((previous, current) => current);
+
+  t.deepEqual(updatedCard, card);
+});
+
+Test(`delete by an id`, t => {
+  const id = `BRMA13_4_2_TB`;
+  const cards = Cards.delete(id);
+  // t.not(Cards.all().length, cards.length);
+  t.falsy(cards.some(card => card.id === id));
 });

@@ -25,7 +25,7 @@ export default {
     return this.all()
                .filter(card => card.id === id)
                .reduce((previous, current) => current, {});
-               // .map(card => (<div>{card.name}</div>))
+    // .map(card => ({ id: card.id, name: card.name))
   },
 
   simplify() {
@@ -37,4 +37,25 @@ export default {
                  };
                });
   },
+
+  add(card = {}) {
+    const cards = this.all();
+    return [...cards, card];
+  },
+
+  update(id, card) {
+    return this.all()
+               .map(original => {
+                 if (original.id === id)
+                   return Object.assign({}, original, card);
+
+                 return original;
+               });
+  },
+
+  delete(id) {
+    const cards = this.all().filter(card => card.id !== id);
+    return [...cards];
+  }
+
 };
